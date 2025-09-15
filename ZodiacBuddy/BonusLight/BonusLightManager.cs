@@ -133,10 +133,10 @@ public class BonusLightManager : IDisposable {
             var mainHand = Util.GetEquippedItem(0);
             var offHand = Util.GetEquippedItem(1);
 
-            if (!NovusRelic.Items.ContainsKey(mainHand.ItemId) &&
-                !NovusRelic.Items.ContainsKey(offHand.ItemId) &&
-                !BraveRelic.Items.ContainsKey(mainHand.ItemId) &&
-                !BraveRelic.Items.ContainsKey(offHand.ItemId)) {
+            if (!NovusRelic.Items.Contains(mainHand.ItemId) &&
+                !NovusRelic.Items.Contains(offHand.ItemId) &&
+                !BraveRelic.Items.Contains(mainHand.ItemId) &&
+                !BraveRelic.Items.Contains(offHand.ItemId)) {
                 return;
             }
         }

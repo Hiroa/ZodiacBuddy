@@ -51,7 +51,7 @@ internal class BraveManager : IDisposable {
 
     private unsafe void UpdateRelicMagiciteAddon(int slot) {
         var item = Util.GetEquippedItem(slot);
-        if (!BraveRelic.Items.ContainsKey(item.ItemId))
+        if (!BraveRelic.Items.Contains(item.ItemId))
             return;
 
         var addon = (AtkUnitBase*)Service.GameGui.GetAddonByName("RelicMagicite").Address;
@@ -99,9 +99,9 @@ internal class BraveManager : IDisposable {
             var mainhand = Util.GetEquippedItem(0);
             var offhand = Util.GetEquippedItem(1);
 
-            var shouldShowWindow =
-                BraveRelic.Items.ContainsKey(mainhand.ItemId) ||
-                BraveRelic.Items.ContainsKey(offhand.ItemId);
+            var shouldShowWindow = 
+                BraveRelic.Items.Contains(mainhand.ItemId) ||
+                BraveRelic.Items.Contains(offhand.ItemId);
 
             this.window.ShowWindow = shouldShowWindow;
             this.window.MainHandItem = mainhand;

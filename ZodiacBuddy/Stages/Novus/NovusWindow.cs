@@ -7,15 +7,14 @@ namespace ZodiacBuddy.Stages.Novus;
 /// <summary>
 /// Novus information window.
 /// </summary>
-public class NovusWindow() : InformationWindow.InformationWindow("Novus Zodiac Information") {
+public class NovusWindow() : InformationWindow.InformationWindow("Novus Zodiac Information")
+{
     private static InformationWindowConfiguration InfoWindowConfiguration => Service.Configuration.InformationWindow;
 
     /// <inheritdoc/>
     protected override void DisplayRelicInfo(InventoryItem item) {
-        if (!NovusRelic.Items.TryGetValue(item.ItemId, out var name))
-            return;
-
-        name = name
+        
+        var name = Util.GetItemName(item.ItemId)
             .Replace("Œ", "Oe")
             .Replace("œ", "oe");
         ImGui.Text(name);

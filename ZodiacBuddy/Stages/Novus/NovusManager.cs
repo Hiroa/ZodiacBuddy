@@ -64,7 +64,7 @@ internal class NovusManager : IDisposable {
 
     private unsafe void UpdateRelicGlassAddon(int slot, uint nodeId) {
         var item = Util.GetEquippedItem(slot);
-        if (!NovusRelic.Items.ContainsKey(item.ItemId))
+        if (!NovusRelic.Items.Contains(item.ItemId))
             return;
 
         var addon = (AtkUnitBase*)Service.GameGui.GetAddonByName("RelicGlass").Address;
@@ -104,9 +104,9 @@ internal class NovusManager : IDisposable {
             var mainhand = Util.GetEquippedItem(0);
             var offhand = Util.GetEquippedItem(1);
 
-            var shouldShowWindow =
-                NovusRelic.Items.ContainsKey(mainhand.ItemId) ||
-                NovusRelic.Items.ContainsKey(offhand.ItemId);
+            var shouldShowWindow = 
+                NovusRelic.Items.Contains(mainhand.ItemId) ||
+                NovusRelic.Items.Contains(offhand.ItemId);
 
             this.window.ShowWindow = shouldShowWindow;
             this.window.MainHandItem = mainhand;
@@ -131,10 +131,14 @@ internal class NovusManager : IDisposable {
             return;
 
         // Avoid double display if mainhand AND offhand is equipped
-        if (NovusRelic.Items.ContainsKey(Util.GetEquippedItem(0).ItemId) &&
-            NovusRelic.Items.TryGetValue(Util.GetEquippedItem(1).ItemId, out var relicName) &&
-            message.ToString().Contains(relicName))
-            return;
+        if (NovusRelic.Items.Contains(Util.GetEquippedItem(0).ItemId) &&
+            NovusRelic.Items.Contains(Util.GetEquippedItem(1).ItemId))
+        {
+            var offHandId = Util.GetEquippedItem(1).ItemId;
+            var relicName = Util.GetItemName(offHandId);
+            if (message.ToString().Contains(relicName))
+                return;
+        }
 
         foreach (var lightLevel in BonusLightValues) {
             if (!message.ToString().Contains(lightLevel.Message))

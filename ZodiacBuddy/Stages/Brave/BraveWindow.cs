@@ -12,10 +12,7 @@ public class BraveWindow() : InformationWindow.InformationWindow("Zodiac Brave I
 
     /// <inheritdoc/>
     protected override void DisplayRelicInfo(InventoryItem item) {
-        if (!BraveRelic.Items.TryGetValue(item.ItemId, out var name))
-            return;
-
-        name = name
+        var name = Util.GetItemName(item.ItemId)
             .Replace("Œ", "Oe")
             .Replace("œ", "oe");
         ImGui.Text(name);
