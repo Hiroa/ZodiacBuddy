@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Dalamud.Utility;
 using FFXIVClientStructs.FFXIV.Client.Game;
+using Lumina.Excel.Sheets;
 
 namespace ZodiacBuddy;
 
@@ -58,5 +60,22 @@ internal static class Util {
 
         Service.PluginLog.Error($"No bonus light window found for UTC time: {now:O}");
         return null;
+    }
+    
+    /// <summary>
+    /// Get the item name from the item ID.
+    /// </summary>
+    /// <param name="itemId">Item ID to get the name from.</param>
+    /// <returns>Name of the item.</returns>
+    public static string GetItemName(uint itemId) {
+            (var baseId, ItemKind itemKind) = ItemUtil.GetBaseId(itemId);
+            return itemKind switch
+            {
+                // Item from quest or leve quests
+                ItemKind.EventItem =>
+                    Service.DataManager.GetExcelSheet<EventItem>().GetRow(baseId).Name.ExtractText(),
+                // Normal, hq and collectible are in Item sheet
+                _ => Service.DataManager.GetExcelSheet<Item>().GetRow(baseId).Name.ExtractText(),
+            };
     }
 }
