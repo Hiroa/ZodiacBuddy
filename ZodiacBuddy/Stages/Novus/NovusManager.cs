@@ -106,7 +106,8 @@ internal class NovusManager : IDisposable {
 
             var shouldShowWindow = 
                 NovusRelic.Items.Contains(mainhand.ItemId) ||
-                NovusRelic.Items.Contains(offhand.ItemId);
+                NovusRelic.Items.Contains(offhand.ItemId) || 
+                DebugTools.ForceNovusWindowDisplay;
 
             this.window.ShowWindow = shouldShowWindow;
             this.window.MainHandItem = mainhand;

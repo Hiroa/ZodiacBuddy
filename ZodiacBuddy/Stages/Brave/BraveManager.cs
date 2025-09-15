@@ -101,7 +101,8 @@ internal class BraveManager : IDisposable {
 
             var shouldShowWindow = 
                 BraveRelic.Items.Contains(mainhand.ItemId) ||
-                BraveRelic.Items.Contains(offhand.ItemId);
+                BraveRelic.Items.Contains(offhand.ItemId) || 
+                DebugTools.ForceBraveWindowDisplay;
 
             this.window.ShowWindow = shouldShowWindow;
             this.window.MainHandItem = mainhand;

@@ -232,6 +232,19 @@ internal class ConfigWindow : Window {
         if (ImGui.Button("Check Brave books territory"))
             DebugTools.CheckBraveDutyTerritory();
         
+        var forceBraveWindowDisplay = DebugTools.ForceBraveWindowDisplay;
+        if (ImGui.Checkbox("Force Brave window display", ref forceBraveWindowDisplay))
+        {
+            DebugTools.ForceBraveWindowDisplay = forceBraveWindowDisplay;
+        }
+        
+        var forceNovusWindowDisplay = DebugTools.ForceNovusWindowDisplay;
+        if (ImGui.Checkbox("Force Novus window display", ref forceNovusWindowDisplay))
+        {
+            DebugTools.ForceNovusWindowDisplay = forceNovusWindowDisplay;
+        }
+        
+        
         var bonusLightWindow = Util.CurrentBonusLightWindow();
         if (bonusLightWindow.HasValue) {
             var (startWindow, endWindow) = bonusLightWindow.Value;

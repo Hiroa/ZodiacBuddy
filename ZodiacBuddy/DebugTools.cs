@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Dalamud.Game.Text;
 using Dalamud.Game.Text.SeStringHandling;
-using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using ZodiacBuddy.BonusLight;
 using ZodiacBuddy.Stages.Atma.Data;
 
@@ -12,6 +11,9 @@ namespace ZodiacBuddy;
 /// </summary>
 public static class DebugTools
 {
+    public static bool ForceBraveWindowDisplay { get; set; }
+    public static bool ForceNovusWindowDisplay { get; set; }
+    
     /// <summary>
     /// Check that all the territory id in the bonus light duty have a name in Lumina.
     /// <p/>
